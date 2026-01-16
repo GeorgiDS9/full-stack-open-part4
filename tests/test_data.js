@@ -1,4 +1,4 @@
-export const blogs = [
+const blogs = [
   {
     _id: "5a422a851b54a676234d17f7",
     title: "React patterns",
@@ -48,3 +48,5 @@ export const blogs = [
     __v: 0,
   },
 ];
+
+module.exports = { blogs };
