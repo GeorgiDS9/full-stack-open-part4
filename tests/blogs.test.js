@@ -60,4 +60,39 @@ describe("total likes", () => {
       assert.ok(result.author === "Author A" || result.author === "Author B");
     });
   });
+
+  describe("most likes", () => {
+    test("of empty list is null", () => {
+      const result = listHelper.mostLikes([]);
+      assert.strictEqual(result, null);
+    });
+
+    test("when list has only one blog, returns that author with their likes", () => {
+      const result = listHelper.mostLikes([blogs[0]]);
+      assert.deepStrictEqual(result, {
+        author: "Michael Chan",
+        likes: 7,
+      });
+    });
+
+    test("when list has multiple blogs, returns author with most total likes", () => {
+      const result = listHelper.mostLikes(blogs);
+      assert.deepStrictEqual(result, {
+        author: "Edsger W. Dijkstra",
+        likes: 17,
+      });
+    });
+
+    test("when multiple authors have same total likes, returns any one of them", () => {
+      const testBlogs = [
+        { author: "Author A", title: "Blog 1", likes: 5 },
+        { author: "Author B", title: "Blog 2", likes: 5 },
+        { author: "Author A", title: "Blog 3", likes: 3 },
+        { author: "Author B", title: "Blog 4", likes: 3 },
+      ];
+      const result = listHelper.mostLikes(testBlogs);
+      assert.strictEqual(result.likes, 8);
+      assert.ok(result.author === "Author A" || result.author === "Author B");
+    });
+  });
 });
